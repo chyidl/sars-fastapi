@@ -6,6 +6,7 @@ from app.database import SessionLocal, engine
 
 db = SessionLocal()
 
+# to create out models in the database
 models.Base.metadata.create_all(bind=engine)
 
 with open("sars_2003_complete_dataset_clean.csv", "r") as f:

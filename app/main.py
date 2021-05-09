@@ -8,11 +8,12 @@ from starlette.responses import RedirectResponse
 from . import models, schemas
 from .database import SessionLocal, engine
 
+# create our models in the database
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-
+# CORS or "Cross-Origin Resource Sharing" referes to the situations where a frontend running in a browser has JavaScript code that communicates with a backend, and the backend is in a different "origin" than the frontend.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -23,6 +24,7 @@ app.add_middleware(
 
 # Dependency
 def get_db():
+    # ensures that any route passed this function ought to have our SessionLocal database connection when needed and that the session is closed after use.
     try:
         db = SessionLocal()
         yield db
